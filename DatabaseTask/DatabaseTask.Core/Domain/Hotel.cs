@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DatabaseTask.Core.Domain
 {
@@ -17,5 +18,11 @@ namespace DatabaseTask.Core.Domain
 
         public ICollection<Room> Rooms { get; set; }
             = new List<Room>();
+
+        public Guid BookableId { get; set; }
+
+        [ForeignKey(nameof(BookableId))]
+
+        public Bookable? Bookable { get; set; }
     }
 }

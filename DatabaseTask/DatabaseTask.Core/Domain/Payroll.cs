@@ -10,6 +10,6 @@ namespace DatabaseTask.Core.Domain
         public DateTime Date { get; set; }
 
         //nav property
-        public Employee Employee { get; set; }
+        public Employee? Employee { get; set; }
     }
 }

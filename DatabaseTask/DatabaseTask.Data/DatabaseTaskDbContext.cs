@@ -28,5 +28,7 @@ namespace DatabaseTask.Data
         public DbSet<Payment> Payments { get; set; }
 
         public DbSet<Payroll> Payrolls { get; set; }
+
+        public DbSet<Bookable> Bookables { get; set; }
     }
 }

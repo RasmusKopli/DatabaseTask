@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace DatabaseTask.Core.Domain
@@ -17,8 +18,15 @@ namespace DatabaseTask.Core.Domain
         public DateTime EndDate { get; set; }
         public string PersonalId { get; set; }
 
-        public ICollection<Payroll> ServiceOrders { get; set; }
+        public ICollection<Payroll> Payrolls { get; set; }
             = new List<Payroll>();
+
+
+        public Guid HotelId { get; set; }
+
+        [ForeignKey(nameof(HotelId))]
+
+        public Hotel? Hotel { get; set; }
     }
 }
 
