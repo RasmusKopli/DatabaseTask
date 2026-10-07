@@ -1,0 +1,23 @@
+Ülesanne: Hotelli infosüsteem
+
+Hotell soovib luua infosüsteemi, mille abil hallata tube, külalisi, broneeringuid, töötajaid ja hotellis pakutavaid teenuseid.
+
+Hotellis on erinevad toatüübid, näiteks standardtuba, peretuba ja sviit. Toatüübi kohta säilitatakse nimi, kirjeldus ja ühe öö hind.
+
+Hotellis on toad. Igal toal on number, korrus ja toatüüp. Iga tuba kuulub konkreetsesse hotelli.
+
+Hotelli kohta säilitatakse nimi, aadress, telefon ja e-posti aadress.
+
+Hotelli saavad külastada külalised. Külalise kohta säilitatakse eesnimi, perekonnanimi, isikukood, telefon ja e-post.
+
+Külaline võib teha ühe või mitu broneeringut. Broneeringul on alguskuupäev, lõppkuupäev ja staatus. Broneeringuga seotud töötaja registreerib või haldab broneeringut.
+
+Ühe broneeringuga võib olla seotud mitu tuba ning sama tuba võib erinevatel aegadel kuuluda paljudesse broneeringutesse. Seetõttu on vaja eraldi objekti BroneeringTuba, kus säilitatakse ka broneeritud külaliste arv ja toa hind.
+
+Hotellis töötavad töötajad. Töötaja kohta säilitatakse eesnimi, perekonnanimi, ametikoht ja telefon. Töötaja kuulub konkreetsesse hotelli.
+
+Hotell pakub külalistele erinevaid teenuseid, näiteks hommikusöök, sauna kasutamine või toateenindus. Teenuse kohta säilitatakse nimi, kirjeldus ja hind.
+
+Broneeringuga võib olla seotud mitu teenusetellimust. Teenusetellimusel säilitatakse tellimuse kuupäev, kogus ja summa. Sama teenust võivad tellida paljud erinevad broneeringud.
+
+Broneeringu eest tehakse makseid. Makse kohta säilitatakse kuupäev, summa ja makseviis.
