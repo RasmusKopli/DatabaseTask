@@ -150,6 +150,33 @@ namespace DatabaseTask.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    EmployeeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    JobPosition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TerminalID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AirportID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.EmployeeID);
+                    table.ForeignKey(
+                        name: "FK_Employee_Airports_AirportID",
+                        column: x => x.AirportID,
+                        principalTable: "Airports",
+                        principalColumn: "AirportID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Employee_Terminals_TerminalID",
+                        column: x => x.TerminalID,
+                        principalTable: "Terminals",
+                        principalColumn: "TerminalID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -234,6 +261,16 @@ namespace DatabaseTask.Data.Migrations
                 column: "TerminalID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employee_AirportID",
+                table: "Employee",
+                column: "AirportID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employee_TerminalID",
+                table: "Employee",
+                column: "TerminalID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Gates_TerminalID",
                 table: "Gates",
                 column: "TerminalID");
@@ -272,6 +309,9 @@ namespace DatabaseTask.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Airplanes");
+
+            migrationBuilder.DropTable(
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "Passengers");

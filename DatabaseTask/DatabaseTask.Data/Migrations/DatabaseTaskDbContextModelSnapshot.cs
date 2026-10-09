@@ -153,6 +153,38 @@ namespace DatabaseTask.Data.Migrations
                     b.ToTable("Airports");
                 });
 
+            modelBuilder.Entity("DatabaseTask.Core.Domain.Employees", b =>
+                {
+                    b.Property<Guid>("EmployeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AirportID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("JobPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TerminalID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EmployeeID");
+
+                    b.HasIndex("AirportID");
+
+                    b.HasIndex("TerminalID");
+
+                    b.ToTable("Employee");
+                });
+
             modelBuilder.Entity("DatabaseTask.Core.Domain.Gate", b =>
                 {
                     b.Property<Guid>("GateID")
@@ -336,6 +368,23 @@ namespace DatabaseTask.Data.Migrations
                         .HasForeignKey("TerminalID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Terminal");
+                });
+
+            modelBuilder.Entity("DatabaseTask.Core.Domain.Employees", b =>
+                {
+                    b.HasOne("DatabaseTask.Core.Domain.Airport", "Airport")
+                        .WithMany()
+                        .HasForeignKey("AirportID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseTask.Core.Domain.Terminal", "Terminal")
+                        .WithMany()
+                        .HasForeignKey("TerminalID");
+
+                    b.Navigation("Airport");
 
                     b.Navigation("Terminal");
                 });

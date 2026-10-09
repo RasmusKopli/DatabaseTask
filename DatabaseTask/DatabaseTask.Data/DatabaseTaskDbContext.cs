@@ -21,5 +21,6 @@ namespace DatabaseTask.Data
         public DbSet<Terminal> Terminals { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Employees> Employee { get; set; }
     }
 }

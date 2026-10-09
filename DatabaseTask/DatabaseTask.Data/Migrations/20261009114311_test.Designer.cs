@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseTask.Data.Migrations
 {
     [DbContext(typeof(DatabaseTaskDbContext))]
-    [Migration("20261009113200_test")]
+    [Migration("20261009114311_test")]
     partial class test
     {
         /// <inheritdoc />
@@ -154,6 +154,38 @@ namespace DatabaseTask.Data.Migrations
                     b.HasIndex("TerminalID");
 
                     b.ToTable("Airports");
+                });
+
+            modelBuilder.Entity("DatabaseTask.Core.Domain.Employees", b =>
+                {
+                    b.Property<Guid>("EmployeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AirportID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("JobPosition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TerminalID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EmployeeID");
+
+                    b.HasIndex("AirportID");
+
+                    b.HasIndex("TerminalID");
+
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Gate", b =>
@@ -339,6 +371,23 @@ namespace DatabaseTask.Data.Migrations
                         .HasForeignKey("TerminalID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Terminal");
+                });
+
+            modelBuilder.Entity("DatabaseTask.Core.Domain.Employees", b =>
+                {
+                    b.HasOne("DatabaseTask.Core.Domain.Airport", "Airport")
+                        .WithMany()
+                        .HasForeignKey("AirportID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DatabaseTask.Core.Domain.Terminal", "Terminal")
+                        .WithMany()
+                        .HasForeignKey("TerminalID");
+
+                    b.Navigation("Airport");
 
                     b.Navigation("Terminal");
                 });
